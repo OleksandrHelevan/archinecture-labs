@@ -1,7 +1,7 @@
 package prototype.impl;
 
 import prototype.CloneableTicket;
-import model.Ticket;
+import common.Ticket;
 
 import java.util.UUID;
 

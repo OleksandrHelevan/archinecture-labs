@@ -1,6 +1,6 @@
 package prototype;
 
-import model.Ticket;
+import common.Ticket;
 
 public interface CloneableTicket {
     Ticket cloneTicket();

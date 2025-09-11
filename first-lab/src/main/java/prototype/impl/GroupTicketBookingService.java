@@ -1,6 +1,6 @@
 package prototype.impl;
 
-import model.Ticket;
+import common.Ticket;
 import singleton.TicketRepository;
 
 public class GroupTicketBookingService {
