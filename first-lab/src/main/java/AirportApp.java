@@ -1,8 +1,10 @@
-import abstract_factory.impl.BookingFactoryImpl;
+import abstract_factory.impl.TicketFactoryImpl;
+import builder.Client;
 import factory.PaymentType;
 import common.*;
+import object_pool.RacePool;
 import prototype.impl.GroupTicket;
-import prototype.impl.GroupTicketBookingService;
+import prototype.impl.GroupTicketService;
 import singleton.TicketRepository;
 
 import java.time.LocalTime;
@@ -12,6 +14,19 @@ import java.util.List;
 public class AirportApp {
 
     public static void main(String[] args) throws InterruptedException {
+
+        Client oleksandr = new Client.Builder()
+                .id("1")
+                .username("oleksandr")
+                .password("oleksandr")
+                .build();
+
+        Client andriy = new Client.Builder()
+                .id("2")
+                .username("andriy")
+                .password("andriy")
+                .build();
+
         City kyiv = new City("Kyiv-UA", "Kyiv", "Ukraine");
         City london = new City("London-UK", "London", "United Kingdom");
         City khust = new City("Khust-UA", "Khust", "Ukraine");
@@ -25,9 +40,9 @@ public class AirportApp {
         Route fromLondonToKyiv = new Route("3", london, kyiv, startTime, endTime);
         Route fromKhustToLondon = new Route("4", khust, london, startTime, endTime);
 
-        BookingFactoryImpl factory = new BookingFactoryImpl();
+        TicketFactoryImpl factory = new TicketFactoryImpl();
         TicketRepository repo = TicketRepository.getInstance();
-        GroupTicketBookingService groupService = new GroupTicketBookingService();
+        GroupTicketService groupService = new GroupTicketService();
 
         List<Thread> ticketThreads = new ArrayList<>();
         ticketThreads.add(new Thread(() -> repo.addTicket(factory.createTicket("1", fromKhustToChernivtsi, 500, Currency.UAH))));
@@ -42,6 +57,38 @@ public class AirportApp {
         Ticket ticket1 = repo.getTicketById("1").orElseThrow();
         Ticket ticket2 = repo.getTicketById("2").orElseThrow();
         Ticket ticket3 = repo.getTicketById("3").orElseThrow();
+
+        RacePool racePool = new RacePool();
+        racePool.addTicket(ticket1);
+
+        Thread client1 = new Thread(() -> {
+            try {
+                Ticket t = racePool.reserve(ticket1.getRoute().getId());
+                System.out.println(oleksandr.getUsername() + " reserved: " + t.getId());
+                Thread.sleep(1000);
+                racePool.release(t);
+                System.out.println(oleksandr.getUsername() + " returned: " + t.getId());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+
+        Thread client2 = new Thread(() -> {
+            try {
+                Ticket t = racePool.reserve(ticket1.getRoute().getId());
+                System.out.println(andriy.getUsername() + " reserved: " + t.getId());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+
+        client1.start();
+        Thread.sleep(200);
+        client2.start();
+
+        client1.join();
+        client2.join();
+
 
         GroupTicket prototype1 = new GroupTicket(ticket1);
         GroupTicket prototype2 = new GroupTicket(ticket2);
@@ -60,7 +107,10 @@ public class AirportApp {
         factory.createPayment(PaymentType.CRYPTO);
         factory.createPayment(PaymentType.CASH_REGISTER);
 
-        System.out.println("All tickets in repository:");
+        System.out.println("All tickets in repo:");
         repo.getAllTickets().forEach(System.out::println);
+
+        System.out.println("All available tickets for Route 1: " + racePool.availableCount("1"));
+
     }
 }

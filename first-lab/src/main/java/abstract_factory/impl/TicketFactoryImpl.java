@@ -1,17 +1,14 @@
 package abstract_factory.impl;
 
-import abstract_factory.BookingFactory;
+import abstract_factory.TicketFactory;
 import factory.PaymentFactory;
 import factory.PaymentType;
 import factory.impl.PaymentFactoryImpl;
 import common.Currency;
 import common.Route;
 import common.Ticket;
-import prototype.impl.GroupTicketBookingService;
 
-public class BookingFactoryImpl implements BookingFactory {
-
-    private final GroupTicketBookingService groupService = new GroupTicketBookingService();
+public class TicketFactoryImpl implements TicketFactory {
 
     @Override
     public Ticket createTicket(String id, Route route, double price, Currency currency) {

@@ -6,7 +6,7 @@ import common.Currency;
 import common.Route;
 import common.Ticket;
 
-public interface BookingFactory {
+public interface TicketFactory {
     Ticket createTicket(String id, Route route, double price, Currency currency);
     PaymentFactory createPayment(PaymentType type);
 }

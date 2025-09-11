@@ -3,7 +3,7 @@ package prototype.impl;
 import common.Ticket;
 import singleton.TicketRepository;
 
-public class GroupTicketBookingService {
+public class GroupTicketService {
 
     private final TicketRepository repository = TicketRepository.getInstance();
 
