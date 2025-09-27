@@ -1,6 +1,6 @@
 package singleton;
 
-import common.Ticket;
+import model.Ticket;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,10 +9,11 @@ import java.util.Optional;
 
 public class TicketRepository {
     private static volatile TicketRepository instance;
+
     private final List<Ticket> tickets;
 
     private TicketRepository() {
-        this.tickets = Collections.synchronizedList(new ArrayList<>());
+        this.tickets = new ArrayList<>();
     }
 
     public static TicketRepository getInstance() {
@@ -31,16 +32,17 @@ public class TicketRepository {
     }
 
     public List<Ticket> getAllTickets() {
-        synchronized (tickets) {
-            return new ArrayList<>(tickets);
-        }
+        return Collections.unmodifiableList(tickets);
     }
 
     public Optional<Ticket> getTicketById(String id) {
-        synchronized (tickets) {
-            return tickets.stream()
-                    .filter(t -> t.getId().equals(id))
-                    .findFirst();
-        }
+        return tickets.stream()
+                .filter(t -> t.getId().equals(id))
+                .findFirst();
+    }
+
+    public boolean removeTicketById(String id) {
+        return tickets.removeIf(t -> t.getId().equals(id));
     }
 }
+
