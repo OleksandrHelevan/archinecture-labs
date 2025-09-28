@@ -4,8 +4,8 @@ import adapter.TxtPassAdapter;
 import bridge.DomesticFlight;
 import bridge.Flight;
 import bridge.InternationalFlight;
-import bridge.AirbusImplementation;
-import bridge.BoeingImplementation;
+import bridge.AirbusImpl;
+import bridge.BoeingImpl;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,10 +17,10 @@ public class Main {
         OnlineTicketOffice office2 = new OnlineTicketOffice(txtAdapter);
         office2.issueBoardingPass("Вася", "LH202");
 
-        Flight flight1 = new DomesticFlight(new BoeingImplementation());
+        Flight flight1 = new DomesticFlight(new BoeingImpl());
         flight1.schedule("PS101");
 
-        Flight flight2 = new InternationalFlight(new AirbusImplementation());
+        Flight flight2 = new InternationalFlight(new AirbusImpl());
         flight2.schedule("PS202");
     }
 }
