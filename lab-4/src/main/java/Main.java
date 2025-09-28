@@ -1,6 +1,6 @@
 import adapter.*;
-import adapter.impl.PdfPassAdapter;
-import adapter.impl.TxtPassAdapter;
+import adapter.PdfPassAdapter;
+import adapter.TxtPassAdapter;
 import bridge.DomesticFlight;
 import bridge.Flight;
 import bridge.InternationalFlight;

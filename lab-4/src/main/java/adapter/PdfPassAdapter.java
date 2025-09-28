@@ -1,7 +1,5 @@
-package adapter.impl;
+package adapter;
 
-import adapter.BoardingPassGenerator;
-import adapter.PdfBoardingPassSystem;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
