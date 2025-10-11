@@ -23,8 +23,8 @@ public class AirportApp {
 
         Client andriy = new Client.Builder()
                 .id("2")
-                .username("andriy")
-                .password("andriy")
+                .username("vasyl")
+                .password("vasyl")
                 .build();
 
         City kyiv = new City("Kyiv-UA", "Kyiv", "Ukraine");

@@ -1,6 +1,6 @@
 package singleton;
 
-import model.Ticket;
+import common.Ticket;
 
 import java.util.ArrayList;
 import java.util.Collections;
