@@ -3,7 +3,6 @@ import proxy.Role;
 import proxy.TicketBookingProxy;
 import proxy.User;
 import proxy.service.TicketBookingService;
-import proxy.service.impl.TicketBookingServiceImpl;
 
 import java.time.LocalDate;
 import java.util.Locale;
@@ -11,13 +10,11 @@ import java.util.Locale;
 public class Main {
     public static void main(String[] args) {
 
-        User admin = new User("Shony", Role.ADMIN);
-        User guest = new User("RandomGuy", Role.GUEST);
+        User admin = new User("Oleksandr", Role.ADMIN);
+        User guest = new User("Vasyl", Role.GUEST);
 
-        TicketBookingService realService = new TicketBookingServiceImpl();
-
-        TicketBookingService adminProxy = new TicketBookingProxy(realService, admin);
-        TicketBookingService guestProxy = new TicketBookingProxy(realService, guest);
+        TicketBookingService adminProxy = new TicketBookingProxy(admin);
+        TicketBookingService guestProxy = new TicketBookingProxy(guest);
 
         Ticket basic = new BasicTicket("Lviv", "London", LocalDate.of(2025, 11, 1), 120.0);
 
@@ -29,10 +26,10 @@ public class Main {
 
         printTicket(insured);
 
-        System.out.println("=== Спроба бронювання від адміністратора ===");
+        System.out.println("Admin:");
         adminProxy.bookTicket(insured);
 
-        System.out.println("\n=== Спроба бронювання від гостя ===");
+        System.out.println("\nGuest:");
         guestProxy.bookTicket(insured);
 
     }
