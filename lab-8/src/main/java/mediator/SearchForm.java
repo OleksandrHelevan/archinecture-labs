@@ -1,5 +1,8 @@
 package mediator;
 
+import lombok.Getter;
+
+@Getter
 public class SearchForm implements Component {
     private Mediator mediator;
     private String from;
@@ -14,13 +17,5 @@ public class SearchForm implements Component {
         this.from = from;
         this.to = to;
         mediator.notify(this, Event.SEARCH);
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public String getTo() {
-        return to;
     }
 }

@@ -1,15 +1,14 @@
 package iterator;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 
+@RequiredArgsConstructor
 public class FlightTicketIterator implements TicketIterator {
 
     private final List<Ticket> tickets;
     private int position = 0;
-
-    public FlightTicketIterator(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
 
     @Override
     public boolean hasNext() {

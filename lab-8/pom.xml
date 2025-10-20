@@ -6,4 +6,12 @@
   <version>1.0-SNAPSHOT</version>
   <name>Archetype - lab-8</name>
   <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.34</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 </project>
