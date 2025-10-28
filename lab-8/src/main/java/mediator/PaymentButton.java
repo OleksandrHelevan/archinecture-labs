@@ -1,7 +1,10 @@
 package mediator;
 
+import lombok.Getter;
+
 public class PaymentButton implements Component {
     private Mediator mediator;
+    @Getter
     private boolean enabled = false;
 
     @Override

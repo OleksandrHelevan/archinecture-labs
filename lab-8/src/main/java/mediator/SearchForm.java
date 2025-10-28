@@ -18,4 +18,5 @@ public class SearchForm implements Component {
         this.to = to;
         mediator.notify(this, Event.SEARCH);
     }
+
 }

@@ -22,6 +22,5 @@ public class AirlineBookingService {
     public void process(BookingRequest bookingRequest) {
         System.out.println("=== Початок обробки заявки ===");
         invoker.executeAll(bookingRequest);
-        System.out.println("=== Завершено ===\n");
     }
 }

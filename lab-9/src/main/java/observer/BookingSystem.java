@@ -12,11 +12,6 @@ public class BookingSystem implements Subject {
     }
 
     @Override
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
     public void notifyObservers(String message) {
         for (Observer o : observers) {
             o.update(message);

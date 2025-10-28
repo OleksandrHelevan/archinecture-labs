@@ -32,9 +32,11 @@ public class FlightMediator implements Mediator {
             }
             case SELECT: {
                 System.out.println("Рейс вибрано.");
-                paymentButton.setEnabled(true);
+                paymentButton.setEnabled(false);
             }
-            case PAY: System.out.println("Оплата квитка... Успішно!");
+            case PAY: {
+                System.out.println("Успішно");
+            }
         }
     }
 }
