@@ -47,13 +47,8 @@ public enum PaymentType implements PaymentStrategy {
 
     PaymentType(String displayName) {
         this.displayName = displayName;
-    }
 
-    @Override
-    public String getName() {
-        return displayName;
     }
-
     @Override
     public abstract double calculateTotal(double basePrice);
     public abstract double getCommissionRate(double basePrice);
